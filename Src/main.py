@@ -1,10 +1,5 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-# from cloudipsp import Api, Checkout
-# from pypayment import QiwiPayment, PaymentStatus
-# QiwiPayment.authorize("my_secret_key")
-# from tinkoff.invest import Client
-# from tinkoff.invest.constants import INVEST_GRPC_API
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -30,12 +25,6 @@ class User(db.Model):
     Money = 0
     def __repr__(self):
         return str(self.Name) + "%" + str(self.Password)
-
-
-@app.route('/users')
-def users():
-    users = User.query.order_by(User.Surname).all()
-    return render_template('users.html', users = users)
 
 
 @app.route('/deleteaccount')
@@ -186,4 +175,4 @@ UserStatus = CurrentUserStatus(False, User(), "")
 
 
 if __name__ == "__main__":
-    app.run(port=8001, debug=True) # add debug mode
+    app.run(port=8001, debug=True) # add debug mode, на стандартном 5000 у меня не работал. При желании можно поменять на 5000
